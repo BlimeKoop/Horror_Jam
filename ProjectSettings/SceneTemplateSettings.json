@@ -1,10 +1,5 @@
 {
-    "templatePinStates": [
-        {
-            "templateId": "Basic Indoors (HDRP)",
-            "isEnabled": true
-        }
-    ],
+    "templatePinStates": [],
     "dependencyTypeInfos": [
         {
             "userAdded": false,
