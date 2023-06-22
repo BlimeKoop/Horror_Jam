@@ -52,7 +52,8 @@ public class PickupController : MonoBehaviour
         if (Input.GetMouseButtonDown(1) && rotatedObject == false){
             if (heldObject != null){
                 // rotate the object to face the player
-                heldObject.transform.Rotate(Camera.main.transform.right * -75, Space.World);
+                //heldObject.transform.Rotate(Camera.main.transform.right * -75, Space.World);
+                heldObject.transform.LookAt(Camera.main.transform);
                 rotatedObject = true;
                 //heldObject.transform.position = nVector3(0.75f, 0f, 0f);
 
@@ -78,6 +79,7 @@ public class PickupController : MonoBehaviour
         if (animateObject.GetComponent<Animator>() && animateObject.layer == LayerMask.NameToLayer("Animatable"))
         {
             objectAnimator = animateObject.GetComponent<Animator>();
+            animateObject.transform.GetComponent<OpenCloseSFX>().isOpening = !animateObject.transform.GetComponent<OpenCloseSFX>().isOpening;
             objectAnimator.SetBool("Opened",!objectAnimator.GetBool("Opened"));
         }
     }
