@@ -38,8 +38,8 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: B|Close
-      takeName: Armature|Close
+      name: Armature|A - Open
+      takeName: Armature|A - Open
       internalID: -7643428952882733763
       firstFrame: 0
       lastFrame: 12
@@ -67,9 +67,9 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: A|Open
-      takeName: Armature|Open
-      internalID: -2430399904381643104
+      name: Armature|B - Close
+      takeName: Armature|B - Close
+      internalID: -131057516454769263
       firstFrame: 0
       lastFrame: 12
       wrapMode: 0
