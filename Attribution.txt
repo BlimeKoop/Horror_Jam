@@ -1,4 +1,4 @@
-Hyung (CG-Moon)		-	child model
+Hyung (CG-Moon)		-	Child Model
 gencraft		-	AI generated photos
 
 Sketchfab:
@@ -7,3 +7,4 @@ Freepoly.org		-	PC
 kreems			-	PC + mouse
 Agustin Honnun		-	Simple Book Shelf
 suusinho		-	Corkboard
+Ramesh0208		-	Door
