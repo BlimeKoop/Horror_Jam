@@ -38,8 +38,6 @@ public class PaperLocking : MonoBehaviour
 
     bool nowScanning = false;
 
-    bool hasPaper = false;
-
     void Start(){
         scannerAnimation = scannerObject.GetComponent<Animator>();
         scanningSoundFX = scannerObject.GetComponent<OpenCloseSFX>();
@@ -57,38 +55,15 @@ public class PaperLocking : MonoBehaviour
     //  CHECKING IF THE OBJECT THAT HAS COLLIDED TAG IS SCANNABLE I.E. PAPER
         if (paper.CompareTag("Scannable"))
         {
+            gameObject.GetComponent<BoxCollider>().enabled = false;
             paperObject = paper.gameObject;
-            IsPaperCheck();
-        }
-    }
-
-    void IsPaperCheck(){
-        switch (hasPaper)
-        {
-            case false:
-                paperObject.gameObject.layer = LayerMask.NameToLayer("Default");
-                paperObject.GetComponent<Rigidbody>().isKinematic = true;
-                paperObject.GetComponent<BoxCollider>().enabled = false;
-                paperObject.transform.parent = lockingPoint.transform;
-                paperObject.transform.localScale = new Vector3(paperObject.transform.localScale.x / 1.5f, paperObject.transform.localScale.y / 1.5f, paperObject.transform.localScale.z / 1.5f);
-                paperObject.transform.position = lockingPoint.transform.position;
-                paperObject.transform.rotation = lockingPoint.transform.rotation;
-                hasPaper = true;
-                break;
-
-            case true:
-                paperObject.layer = LayerMask.NameToLayer("Interactable");
-                paperObject.GetComponent<Rigidbody>().isKinematic = false;
-                paperObject.GetComponent<BoxCollider>().enabled = true;
-                paperObject.transform.parent = _Interactables.transform;
-                paperObject.transform.localScale = new Vector3(paperObject.transform.localScale.x * 1.5f, paperObject.transform.localScale.y * 1.5f, paperObject.transform.localScale.z * 1.5f);
-                paperObject.transform.position = newSpawnPoint.transform.position;
-                paperObject.transform.rotation = newSpawnPoint.transform.rotation;
-                scanningSoundFX.isScanning = false;
-                scanningSoundFX.ScanningSound();
-                hasPaper = false;
-                break;
-
+            paperObject.gameObject.layer = LayerMask.NameToLayer("Default");
+            paperObject.GetComponent<Rigidbody>().isKinematic = true;
+            paperObject.GetComponent<BoxCollider>().enabled = false;
+            paperObject.transform.parent = lockingPoint.transform;
+            paperObject.transform.localScale = new Vector3(paperObject.transform.localScale.x / 1.5f, paperObject.transform.localScale.y / 1.5f, paperObject.transform.localScale.z / 1.5f);
+            paperObject.transform.position = lockingPoint.transform.position;
+            paperObject.transform.rotation = lockingPoint.transform.rotation;
         }
     }
 
@@ -125,6 +100,7 @@ public class PaperLocking : MonoBehaviour
     IEnumerator ScanningCompleted(){
         yield return new WaitForSeconds(0.5f);
         paperObject.layer = LayerMask.NameToLayer("Interactable");
+        paperObject.tag = "Untagged";
         paperObject.GetComponent<Rigidbody>().isKinematic = false;
         paperObject.GetComponent<BoxCollider>().enabled = true;
         paperObject.transform.parent = _Interactables.transform;
@@ -138,6 +114,6 @@ public class PaperLocking : MonoBehaviour
         Debug.Log("Completed Scanning");
         paperObject = null;
         nowScanning = false;
-        hasPaper = false;
+        gameObject.GetComponent<BoxCollider>().enabled = true;
     }
 }

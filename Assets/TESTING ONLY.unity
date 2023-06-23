@@ -398,6 +398,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4459864850019384740, guid: 6bacecc4f3df9584198879c73a6b6c36,
+        type: 3}
+      propertyPath: enableZoom
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4459864850019384750, guid: 6bacecc4f3df9584198879c73a6b6c36,
         type: 3}
       propertyPath: m_Name
@@ -469,14 +474,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1267178366}
-  m_LocalRotation: {x: 0.21264584, y: -0.3233204, z: -0.674375, w: 0.6288593}
-  m_LocalPosition: {x: 1.313, y: 0.429, z: -0.19}
+  m_LocalRotation: {x: -0.078258656, y: -0.37898535, z: -0.032184485, w: 0.9215258}
+  m_LocalPosition: {x: 1.3156, y: 0.434, z: -0.1887}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1813495049}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: -9.708, y: -44.711, z: -90}
+  m_LocalEulerAnglesHint: {x: -9.708, y: -44.711, z: 0}
 --- !u!65 &1267178368
 BoxCollider:
   m_ObjectHideFlags: 0
