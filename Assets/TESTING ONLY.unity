@@ -650,6 +650,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3489337081963781770, guid: eb83695f56a3b1846a2a1ba49c4e8882,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.918
+      objectReference: {fileID: 0}
+    - target: {fileID: 3489337081963781770, guid: eb83695f56a3b1846a2a1ba49c4e8882,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.256
+      objectReference: {fileID: 0}
     - target: {fileID: 3751542676798410751, guid: eb83695f56a3b1846a2a1ba49c4e8882,
         type: 3}
       propertyPath: m_IsActive
@@ -665,6 +675,31 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.086
       objectReference: {fileID: 0}
+    - target: {fileID: 5718806221520712489, guid: eb83695f56a3b1846a2a1ba49c4e8882,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5718806221520712489, guid: eb83695f56a3b1846a2a1ba49c4e8882,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: ddf079edd93e6e3448487f0b4301bee6, type: 3}
+    - target: {fileID: 5832194300730821259, guid: eb83695f56a3b1846a2a1ba49c4e8882,
+        type: 3}
+      propertyPath: soundFX.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5832194300730821259, guid: eb83695f56a3b1846a2a1ba49c4e8882,
+        type: 3}
+      propertyPath: soundFX.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 1b1fe5272f5a37449b334f1839ed19b4, type: 3}
+    - target: {fileID: 5832194300730821259, guid: eb83695f56a3b1846a2a1ba49c4e8882,
+        type: 3}
+      propertyPath: soundFX.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: a69e0fd880638594981814e4bfeea3b6, type: 3}
     - target: {fileID: 8840421768652778055, guid: eb83695f56a3b1846a2a1ba49c4e8882,
         type: 3}
       propertyPath: _Interactables
