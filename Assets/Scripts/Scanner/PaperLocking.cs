@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -18,6 +20,8 @@ public class PaperLocking : MonoBehaviour
     private GameObject newSpawnPoint;
     [SerializeField]
     private GameObject _Interactables;
+    [SerializeField]
+    private GameObject monitorPoint;
 
     [SerializeField]
     private GameObject scannerObject;
@@ -26,9 +30,15 @@ public class PaperLocking : MonoBehaviour
 
     private GameObject paperObject;
 
+    private GameObject scannedObj;
+
     public float waitTimer = 3f;
 
+    private GameObject cloneObj;
+
     bool nowScanning = false;
+
+    bool hasPaper = false;
 
     void Start(){
         scannerAnimation = scannerObject.GetComponent<Animator>();
@@ -48,13 +58,37 @@ public class PaperLocking : MonoBehaviour
         if (paper.CompareTag("Scannable"))
         {
             paperObject = paper.gameObject;
-            paperObject.gameObject.layer = LayerMask.NameToLayer("Default");
-            paperObject.GetComponent<Rigidbody>().isKinematic = true;
-            paperObject.GetComponent<BoxCollider>().enabled = false;
-            paperObject.transform.parent = lockingPoint.transform;
-            paperObject.transform.localScale = new Vector3(paperObject.transform.localScale.x / 1.5f, paperObject.transform.localScale.y / 1.5f, paperObject.transform.localScale.z / 1.5f);
-            paperObject.transform.position = lockingPoint.transform.position;
-            paperObject.transform.rotation = lockingPoint.transform.rotation;
+            IsPaperCheck();
+        }
+    }
+
+    void IsPaperCheck(){
+        switch (hasPaper)
+        {
+            case false:
+                paperObject.gameObject.layer = LayerMask.NameToLayer("Default");
+                paperObject.GetComponent<Rigidbody>().isKinematic = true;
+                paperObject.GetComponent<BoxCollider>().enabled = false;
+                paperObject.transform.parent = lockingPoint.transform;
+                paperObject.transform.localScale = new Vector3(paperObject.transform.localScale.x / 1.5f, paperObject.transform.localScale.y / 1.5f, paperObject.transform.localScale.z / 1.5f);
+                paperObject.transform.position = lockingPoint.transform.position;
+                paperObject.transform.rotation = lockingPoint.transform.rotation;
+                hasPaper = true;
+                break;
+
+            case true:
+                paperObject.layer = LayerMask.NameToLayer("Interactable");
+                paperObject.GetComponent<Rigidbody>().isKinematic = false;
+                paperObject.GetComponent<BoxCollider>().enabled = true;
+                paperObject.transform.parent = _Interactables.transform;
+                paperObject.transform.localScale = new Vector3(paperObject.transform.localScale.x * 1.5f, paperObject.transform.localScale.y * 1.5f, paperObject.transform.localScale.z * 1.5f);
+                paperObject.transform.position = newSpawnPoint.transform.position;
+                paperObject.transform.rotation = newSpawnPoint.transform.rotation;
+                scanningSoundFX.isScanning = false;
+                scanningSoundFX.ScanningSound();
+                hasPaper = false;
+                break;
+
         }
     }
 
@@ -76,6 +110,13 @@ public class PaperLocking : MonoBehaviour
         Debug.Log("how many did i run");
         yield return new WaitForSeconds(waitTimer);
         scannerAnimation.SetBool("Opened", true);
+        if (cloneObj != null)
+            DestroyImmediate(cloneObj);
+        scannedObj = paperObject;
+        cloneObj = Instantiate(scannedObj, monitorPoint.transform.position, monitorPoint.transform.rotation,  monitorPoint.transform);
+        Rigidbody spawnedObj = monitorPoint.GetComponentInChildren<Rigidbody>();
+        spawnedObj.isKinematic = false;
+        spawnedObj.useGravity = false;
         StartCoroutine(ScanningCompleted());
     }
 
@@ -97,5 +138,6 @@ public class PaperLocking : MonoBehaviour
         Debug.Log("Completed Scanning");
         paperObject = null;
         nowScanning = false;
+        hasPaper = false;
     }
 }
