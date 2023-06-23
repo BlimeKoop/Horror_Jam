@@ -19,6 +19,7 @@ public class PaperLocking : MonoBehaviour
     [SerializeField]
     private GameObject scannerObject;
     private Animator scannerAnimation;
+    private OpenCloseSFX scanningSoundFX;
 
     private GameObject paperObject;
 
@@ -28,6 +29,7 @@ public class PaperLocking : MonoBehaviour
 
     void Start(){
         scannerAnimation = scannerObject.GetComponent<Animator>();
+        scanningSoundFX = scannerObject.GetComponent<OpenCloseSFX>();
     }
 
     void Update()
@@ -60,16 +62,24 @@ public class PaperLocking : MonoBehaviour
 
     IEnumerator ScanningTimer(){
         nowScanning = true;
+        yield return new WaitForSeconds(0.35f);
+        scanningSoundFX.isScanning = true;
+        scanningSoundFX.ScanningSound();
         Debug.Log("how many did i run");
         yield return new WaitForSeconds(waitTimer);
-        ScanningComplete();
+        ScanningCompletedSound();
     }
 
     //Here is an example of my coding probably better than yandere
     //I feel better about my self when I look at that code and you have to agree with me :)
 
-    void ScanningComplete(){
+    void ScanningCompletedSound(){
         scannerAnimation.SetBool("Opened", true);
+        StartCoroutine(ScanningCompleted());
+    }
+
+    IEnumerator ScanningCompleted(){
+        yield return new WaitForSeconds(0.5f);
         paperObject.layer = LayerMask.NameToLayer("Interactable");
         paperObject.GetComponent<Rigidbody>().isKinematic = false;
         paperObject.GetComponent<BoxCollider>().enabled = true;
@@ -77,6 +87,8 @@ public class PaperLocking : MonoBehaviour
         paperObject.transform.localScale = new Vector3(paperObject.transform.localScale.x * 1.5f, paperObject.transform.localScale.y * 1.5f, paperObject.transform.localScale.z * 1.5f);
         paperObject.transform.position = newSpawnPoint.transform.position;
         paperObject.transform.rotation = newSpawnPoint.transform.rotation;
+        scanningSoundFX.isScanning = false;
+        scanningSoundFX.ScanningSound();
         Debug.Log("Completed reposition and resizing");
         scannerObject.layer = LayerMask.NameToLayer("Animatable");
         Debug.Log("Completed Scanning");

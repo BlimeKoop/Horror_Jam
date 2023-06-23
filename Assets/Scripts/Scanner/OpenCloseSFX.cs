@@ -11,7 +11,8 @@ public class OpenCloseSFX : MonoBehaviour
     AudioClip []soundFX;
 
     public bool isOpening = false;
-
+    public bool isScanning = false;
+    
 
     void Start(){
         scannerSFX = GetComponent<AudioSource>();
@@ -28,6 +29,20 @@ public class OpenCloseSFX : MonoBehaviour
             //Close SFX
             scannerSFX.clip = soundFX[1];
                 scannerSFX.Play();
+            break;
+        }
+    }
+
+    public void ScanningSound(){
+        switch(isScanning){
+            case true:
+                scannerSFX.clip = soundFX[2];
+                scannerSFX.Play();
+            break;
+            case false:
+                scannerSFX.clip = soundFX[3];
+                scannerSFX.Play();
+
             break;
         }
     }
