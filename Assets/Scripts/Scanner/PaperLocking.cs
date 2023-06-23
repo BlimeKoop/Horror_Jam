@@ -9,6 +9,9 @@ public class PaperLocking : MonoBehaviour
 
     //If you are seeing this code for the love of god that is unholy bull shit right here
     //I'm sorry you have to see this MA MA MIA of a mistake I am not a programmer ;)
+
+    //Here is an example of my coding probably better than yandere
+    //I feel better about my self when I look at that code and you have to agree with me :)
     [SerializeField]
     private GameObject lockingPoint;
     [SerializeField]
@@ -34,12 +37,14 @@ public class PaperLocking : MonoBehaviour
 
     void Update()
     {
+        // IF THE SCANNER ANIMATION IS CLOSED AND THE SCANNER IS NOT OPERATING THEN IT WILL BEGIN THE SCANNING OF THE PAPER
         if (scannerAnimation.GetBool("Opened") == false && nowScanning == false){
             ScanningMode();
         }
     }
 
     void OnTriggerEnter(Collider paper){
+    //  CHECKING IF THE OBJECT THAT HAS COLLIDED TAG IS SCANNABLE I.E. PAPER
         if (paper.CompareTag("Scannable"))
         {
             paperObject = paper.gameObject;
@@ -54,12 +59,15 @@ public class PaperLocking : MonoBehaviour
     }
 
     void ScanningMode(){
+    //  IF THE SCANNER IS CLOSED AND IT IS NOT CURRENTLY SCANNING THIS WILL MAKE THE SCANNER NOT INTERACTABLE/ANIMATABLE
         if (paperObject != null){
             scannerObject.layer = LayerMask.NameToLayer("Default");
             StartCoroutine(ScanningTimer());
         }
     }
 
+    // HERE IS THE TIMER CONTROL FOR THE SCANNING MECHANIC, ONCE THE SCANNER CLOSES AND HAS PLAYED THE CLOSED SFX
+    // IT WILL BEGIN THE SCANNING SFX, AFTER WAITTIMER IT WILL HAVE COMPLETED THE SCANNING AND START A NEW COROUTINE
     IEnumerator ScanningTimer(){
         nowScanning = true;
         yield return new WaitForSeconds(0.35f);
@@ -67,17 +75,12 @@ public class PaperLocking : MonoBehaviour
         scanningSoundFX.ScanningSound();
         Debug.Log("how many did i run");
         yield return new WaitForSeconds(waitTimer);
-        ScanningCompletedSound();
-    }
-
-    //Here is an example of my coding probably better than yandere
-    //I feel better about my self when I look at that code and you have to agree with me :)
-
-    void ScanningCompletedSound(){
         scannerAnimation.SetBool("Opened", true);
         StartCoroutine(ScanningCompleted());
     }
 
+    //  ONCE SCANNING HAS BEEN COMPLETED AND THE SCANNER HAS OPENED FROM THE IENUMERATOR ABOVE 
+    //  THIS WILL REMOVE THE PAPER TO ITS DESIGNATED LOCATION AND PLAY THE REMOVAL SFX
     IEnumerator ScanningCompleted(){
         yield return new WaitForSeconds(0.5f);
         paperObject.layer = LayerMask.NameToLayer("Interactable");
