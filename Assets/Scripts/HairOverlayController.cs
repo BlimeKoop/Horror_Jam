@@ -22,8 +22,7 @@ public class HairOverlayController : MonoBehaviour
 
 	public void SetVisibility(float _visibility) {
 		if (!rend.enabled) {
-			Debug.LogError(this + " is not enabled, call SetEnabled method");
-			return;
+			Debug.LogWarning(this + "is not enabled, call SetEnabled method");
 		}
 		
 		visibility = Mathf.Clamp01(_visibility);
