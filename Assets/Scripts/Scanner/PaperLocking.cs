@@ -18,6 +18,8 @@ public class PaperLocking : MonoBehaviour
     private GameObject newSpawnPoint;
     [SerializeField]
     private GameObject _Interactables;
+    [SerializeField]
+    private GameObject scanPoint;
 
     [SerializeField]
     private GameObject scannerObject;
@@ -25,8 +27,11 @@ public class PaperLocking : MonoBehaviour
     private OpenCloseSFX scanningSoundFX;
 
     private GameObject paperObject;
+    private GameObject scannedObj;
 
     public float waitTimer = 3f;
+
+    private GameObject cloneObj;
 
     bool nowScanning = false;
 
@@ -80,6 +85,13 @@ public class PaperLocking : MonoBehaviour
         Debug.Log("how many did i run");
         yield return new WaitForSeconds(waitTimer);
         scannerAnimation.SetBool("Opened", true);
+        if (cloneObj != null)
+            DestroyImmediate(cloneObj);
+        scannedObj = paperObject;
+        cloneObj = Instantiate(scannedObj, scanPoint.transform.position, scanPoint.transform.rotation,  scanPoint.transform);
+        Rigidbody spawnedObj = scanPoint.GetComponentInChildren<Rigidbody>();
+        spawnedObj.isKinematic = false;
+        spawnedObj.useGravity = false;
         StartCoroutine(ScanningCompleted());
     }
 
@@ -88,6 +100,7 @@ public class PaperLocking : MonoBehaviour
     IEnumerator ScanningCompleted(){
         yield return new WaitForSeconds(0.5f);
         paperObject.layer = LayerMask.NameToLayer("Interactable");
+        paperObject.tag = "Untagged";
         paperObject.GetComponent<Rigidbody>().isKinematic = false;
         paperObject.GetComponentInChildren<BoxCollider>().enabled = true;
         paperObject.transform.parent = _Interactables.transform;
@@ -101,5 +114,6 @@ public class PaperLocking : MonoBehaviour
         Debug.Log("Completed Scanning");
         paperObject = null;
         nowScanning = false;
+        gameObject.GetComponent<BoxCollider>().enabled = true;
     }
 }

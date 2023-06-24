@@ -1,0 +1,10 @@
+diff a/Assets/Scripts/Scanner/PaperLocking.cs b/Assets/Scripts/Scanner/PaperLocking.cs	(rejected hunks)
+@@ -89,7 +89,7 @@
+         yield return new WaitForSeconds(0.5f);
+         paperObject.layer = LayerMask.NameToLayer("Interactable");
+         paperObject.GetComponent<Rigidbody>().isKinematic = false;
+-        paperObject.GetComponent<BoxCollider>().enabled = true;
++        paperObject.GetComponentInChildren<BoxCollider>().enabled = true;
+         paperObject.transform.parent = _Interactables.transform;
+         paperObject.transform.localScale = new Vector3(paperObject.transform.localScale.x * 1.5f, paperObject.transform.localScale.y * 1.5f, paperObject.transform.localScale.z * 1.5f);
+         paperObject.transform.position = newSpawnPoint.transform.position;
