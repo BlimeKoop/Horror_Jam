@@ -164,6 +164,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4058178600538191468, guid: a84debc7d7878014698384a3bf2ced91,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7539013696995312695, guid: a84debc7d7878014698384a3bf2ced91,
         type: 3}
       propertyPath: m_RootOrder
@@ -229,6 +234,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a84debc7d7878014698384a3bf2ced91, type: 3}
+--- !u!1 &125379690 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3834037124961691401, guid: a84debc7d7878014698384a3bf2ced91,
+    type: 3}
+  m_PrefabInstance: {fileID: 125379689}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &785882370
 GameObject:
   m_ObjectHideFlags: 0
@@ -1112,6 +1123,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8840421768652778055, guid: eb83695f56a3b1846a2a1ba49c4e8882,
+        type: 3}
+      propertyPath: scanPoint
+      value: 
+      objectReference: {fileID: 125379690}
     - target: {fileID: 8840421768652778055, guid: eb83695f56a3b1846a2a1ba49c4e8882,
         type: 3}
       propertyPath: monitorPoint

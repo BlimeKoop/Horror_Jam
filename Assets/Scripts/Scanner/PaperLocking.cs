@@ -20,22 +20,61 @@ public class PaperLocking : MonoBehaviour
     private GameObject _Interactables;
     [SerializeField]
     private GameObject scanPoint;
+	
+    private GameObject paperObject;
+	private GameObject scannedObj;
+	private GameObject cloneObj;
 
     [SerializeField]
     private GameObject scannerObject;
     private Animator scannerAnimation;
     private OpenCloseSFX scanningSoundFX;
 
-    private GameObject paperObject;
-    private GameObject scannedObj;
+
 
     public float waitTimer = 3f;
 
-    private GameObject cloneObj;
-
     bool nowScanning = false;
 
+    public GameObject hairOverlay;
+    HairOverlayController hairController;
+    int scanCounter = 0;
+
+    void OverlayHair(){
+        switch(scanCounter){
+            case 1:
+                hairController.SetEnabled(true);
+                hairController.SetVisibility(0);
+                break;
+
+            case 2:
+                hairController.SetVisibility(0.03f);
+                break;
+
+            case 3:
+                hairController.SetVisibility(0.06f);
+                break;
+
+            case 4:
+                hairController.SetVisibility(0.1f);
+                break;
+            case 5:
+                hairController.SetVisibility(0.5f);
+                break;
+
+            case 6:
+                hairController.SetVisibility(1);
+                break;
+            default:
+                hairController.SetEnabled(false);
+                hairController.SetVisibility(0);
+                break;
+
+        }
+    }
+
     void Start(){
+		hairController = hairOverlay.GetComponent<HairOverlayController>();
         scannerAnimation = scannerObject.GetComponent<Animator>();
         scanningSoundFX = scannerObject.GetComponent<OpenCloseSFX>();
     }
@@ -71,6 +110,7 @@ public class PaperLocking : MonoBehaviour
     //  IF THE SCANNER IS CLOSED AND IT IS NOT CURRENTLY SCANNING THIS WILL MAKE THE SCANNER NOT INTERACTABLE/ANIMATABLE
         if (paperObject != null){
             scannerObject.layer = LayerMask.NameToLayer("Default");
+            ++scanCounter; //HERE IS WHERE THE CODE I JUST IMPLMENTED
             StartCoroutine(ScanningTimer());
         }
     }
@@ -79,19 +119,27 @@ public class PaperLocking : MonoBehaviour
     // IT WILL BEGIN THE SCANNING SFX, AFTER WAITTIMER IT WILL HAVE COMPLETED THE SCANNING AND START A NEW COROUTINE
     IEnumerator ScanningTimer(){
         nowScanning = true;
+		
         yield return new WaitForSeconds(0.35f);
+		
         scanningSoundFX.isScanning = true;
         scanningSoundFX.ScanningSound();
-        Debug.Log("how many did i run");
+		
+        // Debug.Log("how many did i run");
+		
         yield return new WaitForSeconds(waitTimer);
+		
         scannerAnimation.SetBool("Opened", true);
+		
         if (cloneObj != null)
             DestroyImmediate(cloneObj);
+		
         scannedObj = paperObject;
         cloneObj = Instantiate(scannedObj, scanPoint.transform.position, scanPoint.transform.rotation,  scanPoint.transform);
         Rigidbody spawnedObj = scanPoint.GetComponentInChildren<Rigidbody>();
         spawnedObj.isKinematic = false;
         spawnedObj.useGravity = false;
+		
         StartCoroutine(ScanningCompleted());
     }
 
@@ -99,6 +147,8 @@ public class PaperLocking : MonoBehaviour
     //  THIS WILL REMOVE THE PAPER TO ITS DESIGNATED LOCATION AND PLAY THE REMOVAL SFX
     IEnumerator ScanningCompleted(){
         yield return new WaitForSeconds(0.5f);
+		
+		OverlayHair();
         paperObject.layer = LayerMask.NameToLayer("Interactable");
         paperObject.tag = "Untagged";
         paperObject.GetComponent<Rigidbody>().isKinematic = false;
@@ -109,11 +159,12 @@ public class PaperLocking : MonoBehaviour
         paperObject.transform.rotation = newSpawnPoint.transform.rotation;
         scanningSoundFX.isScanning = false;
         scanningSoundFX.ScanningSound();
-        Debug.Log("Completed reposition and resizing");
+        // Debug.Log("Completed reposition and resizing");
         scannerObject.layer = LayerMask.NameToLayer("Animatable");
-        Debug.Log("Completed Scanning");
+        // Debug.Log("Completed Scanning");
         paperObject = null;
         nowScanning = false;
+		
         gameObject.GetComponent<BoxCollider>().enabled = true;
     }
 }

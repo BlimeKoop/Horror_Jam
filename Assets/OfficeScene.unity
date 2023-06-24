@@ -2682,6 +2682,12 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.3388322, y: 0.4282872, z: 0.037914615}
   m_Center: {x: 0.008808143, y: -2.2949377e-17, z: 0}
+--- !u!1 &452851459 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7683171679677684184, guid: a84debc7d7878014698384a3bf2ced91,
+    type: 3}
+  m_PrefabInstance: {fileID: 512313789859796364}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &538382677
 GameObject:
   m_ObjectHideFlags: 0
@@ -5442,17 +5448,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 981a69dbbfdddb343a0aca3ffdb871d3,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.6
+      value: -0.747
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 981a69dbbfdddb343a0aca3ffdb871d3,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.797
+      value: 0.09
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 981a69dbbfdddb343a0aca3ffdb871d3,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.44
+      value: -3.65
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 981a69dbbfdddb343a0aca3ffdb871d3,
         type: 3}
@@ -6799,6 +6805,11 @@ PrefabInstance:
       propertyPath: scanPoint
       value: 
       objectReference: {fileID: 1329647425}
+    - target: {fileID: 8840421768652778055, guid: eb83695f56a3b1846a2a1ba49c4e8882,
+        type: 3}
+      propertyPath: hairOverlay
+      value: 
+      objectReference: {fileID: 452851459}
     - target: {fileID: 8840421768652778055, guid: eb83695f56a3b1846a2a1ba49c4e8882,
         type: 3}
       propertyPath: monitorPoint
