@@ -53,10 +53,6 @@ public class PickupController : MonoBehaviour
             }
 
         } 
-            if (heldObject != null)
-            {
-            MoveObject();
-            }
 
         //  AFTER AN OBJECT HAS BEEN PICKED UP WE WILL ROTATED AN AXIS TO FACE THE PLAYER
         if (Input.GetMouseButtonDown(1) && rotatedObject == false){
@@ -87,12 +83,17 @@ public class PickupController : MonoBehaviour
     void FixedUpdate(){
         // HeldObjectPosition();
 
+		if (heldObject != null)
+		{
+			MoveObject();
+		}
+
         if (rotatingObj == true)
         {
-            heldObject.transform.rotation = Quaternion.Lerp(
-				heldObject.transform.rotation, holdPoint.rotation, rotationSpeed * Time.fixedDeltaTime);
+            holdPoint.transform.rotation = Quaternion.Lerp(
+				holdPoint.transform.rotation, transform.rotation, rotationSpeed * Time.fixedDeltaTime);
         
-            if (Quaternion.Angle(heldObject.transform.rotation, holdPoint.rotation) < 1) {
+            if (Quaternion.Angle(holdPoint.transform.rotation, transform.rotation) < 1) {
                 rotatingObj = false;
 			}
         }
@@ -112,11 +113,14 @@ public class PickupController : MonoBehaviour
 
     //  HERE IS HOW WE CONTROL THE OBJECTS POSITION 
     void MoveObject(){
-        if (Vector3.Distance(heldObject.transform.position, holdPoint.position) > 0.1f)
-        {
+        if (Vector3.Distance(heldObject.transform.position, holdPoint.position) > 0.1f) {
             Vector3 moveDirection = (holdPoint.position - heldObject.transform.position);
-            heldObjectRigidBody.AddForce(moveDirection * pickupForce);
+            heldObjectRigidBody.AddForce(moveDirection * pickupForce * 1.3f);
         }
+		
+		if (Quaternion.Angle(heldObject.transform.rotation, holdPoint.rotation) > 1f) {
+			heldObjectRigidBody.MoveRotation(holdPoint.rotation);
+		}
     }
 
     void PickupObject(GameObject pickObj)
@@ -128,9 +132,8 @@ public class PickupController : MonoBehaviour
             heldObjectRigidBody.drag = 10;
             heldObjectRigidBody.constraints = RigidbodyConstraints.FreezeRotation;
             heldObject = pickObj;
-
-			heldObject.transform.position = holdPoint.position;
-			heldObject.transform.parent = holdPoint;
+			
+			holdPoint.transform.rotation = heldObject.transform.rotation;
         }
     }
 
