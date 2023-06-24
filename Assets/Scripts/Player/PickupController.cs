@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using Unity.Burst.CompilerServices;
 using Unity.Mathematics;
 using Unity.VisualScripting;
-using UnityEditor.Rendering.Utilities;
-using UnityEditorInternal;
+// using UnityEditor.Rendering.Utilities;
+// using UnityEditorInternal;
 using UnityEngine;
 
 public class PickupController : MonoBehaviour

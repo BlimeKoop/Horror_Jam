@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -20,6 +21,8 @@ public class PaperLocking : MonoBehaviour
     private GameObject _Interactables;
     [SerializeField]
     private GameObject scanPoint;
+
+	private CorkboardController corkboardController;
 	
     private GameObject paperObject;
 	private GameObject scannedObj;
@@ -30,8 +33,6 @@ public class PaperLocking : MonoBehaviour
     private Animator scannerAnimation;
     private OpenCloseSFX scanningSoundFX;
 
-
-
     public float waitTimer = 3f;
 
     bool nowScanning = false;
@@ -39,6 +40,8 @@ public class PaperLocking : MonoBehaviour
     public GameObject hairOverlay;
     HairOverlayController hairController;
     int scanCounter = 0;
+	
+	float volume = 0.0f;
 
     AudioSource scareSounds;
     public AudioClip[] spookySFX;
@@ -47,6 +50,9 @@ public class PaperLocking : MonoBehaviour
 
 
     void OverlayHair(){
+		volume += 0.07f;
+		scareSounds.volume = volume;
+		
         switch(scanCounter){
             case 1:
                 hairController.SetEnabled(true);
@@ -71,6 +77,7 @@ public class PaperLocking : MonoBehaviour
                 hairController.SetVisibility(0.1f);
                 scareSounds.clip = spookySFX[scanCounter - 1];
                 scareSounds.Play();
+				corkboardController.Release();
                 break;
             case 5:
                 hairController.SetVisibility(0.5f);
@@ -89,10 +96,19 @@ public class PaperLocking : MonoBehaviour
                 jumpScareScript.ChildEnabled(true);
                 scareSounds.Play();
                 hairController.SetVisibility(0);
+				
+				StartCoroutine(EndGame());
+				
                 break;
 
         }
     }
+	
+	private IEnumerator EndGame() {
+		yield return new WaitForSeconds(1.0f);
+		
+		Application.Quit();
+	}
 
     void Start() {
         hairController = hairOverlay.GetComponent<HairOverlayController>();
@@ -100,6 +116,8 @@ public class PaperLocking : MonoBehaviour
         scanningSoundFX = scannerObject.GetComponent<OpenCloseSFX>();
         scareSounds = gameObject.GetComponent<AudioSource>();
         jumpScareScript = jumpScareScript.GetComponent<JumpScare>();
+		
+		corkboardController = GameObject.Find("Corkboard").GetComponent<CorkboardController>();
         }
     void Update()
     {
@@ -173,6 +191,10 @@ public class PaperLocking : MonoBehaviour
 		OverlayHair();
         paperObject.layer = LayerMask.NameToLayer("Interactable");
         paperObject.tag = "Untagged";
+		
+		for (int i = 0; i < paperObject.transform.childCount; i++)
+			paperObject.transform.GetChild(i).tag = "Untagged";
+		
         paperObject.GetComponent<Rigidbody>().isKinematic = false;
         paperObject.GetComponentInChildren<BoxCollider>().enabled = true;
         paperObject.transform.parent = _Interactables.transform;
