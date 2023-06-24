@@ -9,9 +9,6 @@ using UnityEngine;
 
 public class PickupController : MonoBehaviour
 {
-    quaternion rotationOffset;
-
-
     [Header("Settings")]
     [SerializeField] Transform holdPoint;
     private GameObject heldObject;
@@ -31,7 +28,6 @@ public class PickupController : MonoBehaviour
 
     //the time between rotation
     bool rotatingObj = false;
-
 
     private void Update()
     {
@@ -87,14 +83,16 @@ public class PickupController : MonoBehaviour
     }
 
     void FixedUpdate(){
-        HeldObjectPosition();
+        // HeldObjectPosition();
 
         if (rotatingObj == true)
         {
-            rotationOffset = Quaternion.Lerp(rotationOffset, Quaternion.identity, rotationSpeed * Time.fixedDeltaTime);
+            heldObject.transform.rotation = Quaternion.Lerp(
+				heldObject.transform.rotation, holdPoint.rotation, rotationSpeed * Time.fixedDeltaTime);
         
-            if (Quaternion.Angle(rotationOffset, Quaternion.identity) < 1)
+            if (Quaternion.Angle(heldObject.transform.rotation, holdPoint.rotation) < 1) {
                 rotatingObj = false;
+			}
         }
     }
 
@@ -128,17 +126,21 @@ public class PickupController : MonoBehaviour
             heldObjectRigidBody.drag = 10;
             heldObjectRigidBody.constraints = RigidbodyConstraints.FreezeRotation;
             heldObject = pickObj;
-            rotationOffset = heldObjectRigidBody.transform.rotation * Quaternion.Inverse(transform.rotation);
+
+			heldObject.transform.position = holdPoint.position;
+			heldObject.transform.parent = holdPoint;
         }
     }
 
+/*
     void HeldObjectPosition()
     {
         if(heldObject != null){
-            heldObjectRigidBody.transform.position = holdPoint.transform.position;
-            heldObjectRigidBody.transform.rotation = transform.rotation * rotationOffset;
+            heldObjectRigidBody.position = holdPoint.transform.position;
+            heldObjectRigidBody.rotation = transform.rotation * Quaternion.AngleAxis(offsetDeg, offsetAxis);
         }
     }
+*/
 
     void DropObject()
     {
