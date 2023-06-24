@@ -40,33 +40,51 @@ public class PaperLocking : MonoBehaviour
     HairOverlayController hairController;
     int scanCounter = 0;
 
+    AudioSource scareSounds;
+    public AudioClip[] spookySFX; 
+
+
     void OverlayHair(){
         switch(scanCounter){
             case 1:
                 hairController.SetEnabled(true);
                 hairController.SetVisibility(0);
+                scareSounds.clip = spookySFX[scanCounter - 1 ];
+                scareSounds.Play();
                 break;
 
             case 2:
                 hairController.SetVisibility(0.03f);
+                scareSounds.clip = spookySFX[scanCounter - 1];
+                scareSounds.Play();
                 break;
 
             case 3:
                 hairController.SetVisibility(0.06f);
+                scareSounds.clip = spookySFX[scanCounter - 1];
+                scareSounds.Play();
                 break;
 
             case 4:
                 hairController.SetVisibility(0.1f);
+                scareSounds.clip = spookySFX[scanCounter - 1];
+                scareSounds.Play();
                 break;
             case 5:
                 hairController.SetVisibility(0.5f);
+                scareSounds.clip = spookySFX[scanCounter - 1];
+                scareSounds.Play();
                 break;
 
             case 6:
                 hairController.SetVisibility(1);
+                scareSounds.clip = spookySFX[scanCounter - 1];
+                scareSounds.Play();
                 break;
             default:
                 hairController.SetEnabled(false);
+                scareSounds.clip = spookySFX[scanCounter - 1];
+                scareSounds.Play();
                 hairController.SetVisibility(0);
                 break;
 
@@ -77,6 +95,8 @@ public class PaperLocking : MonoBehaviour
 		hairController = hairOverlay.GetComponent<HairOverlayController>();
         scannerAnimation = scannerObject.GetComponent<Animator>();
         scanningSoundFX = scannerObject.GetComponent<OpenCloseSFX>();
+        scareSounds = gameObject.GetComponent<AudioSource>();
+
     }
 
     void Update()
