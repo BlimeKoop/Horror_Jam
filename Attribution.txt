@@ -1,10 +1,5 @@
-Hyung (CG-Moon)		-	Child Model
-gencraft		-	AI generated photos
+parent it to empty object
 
-Sketchfab:
-			
-Freepoly.org		-	PC
-kreems			-	PC + mouse
-Agustin Honnun		-	Simple Book Shelf
-suusinho		-	Corkboard
-Ramesh0208		-	Door
+rotate that
+
+set that things up vector to Vector3.UP

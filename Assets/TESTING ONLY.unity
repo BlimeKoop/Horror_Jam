@@ -1103,31 +1103,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.086
       objectReference: {fileID: 0}
-    - target: {fileID: 5718806221520712489, guid: eb83695f56a3b1846a2a1ba49c4e8882,
-        type: 3}
-      propertyPath: m_Volume
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5718806221520712489, guid: eb83695f56a3b1846a2a1ba49c4e8882,
-        type: 3}
-      propertyPath: m_audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: ddf079edd93e6e3448487f0b4301bee6, type: 3}
-    - target: {fileID: 5832194300730821259, guid: eb83695f56a3b1846a2a1ba49c4e8882,
-        type: 3}
-      propertyPath: soundFX.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5832194300730821259, guid: eb83695f56a3b1846a2a1ba49c4e8882,
-        type: 3}
-      propertyPath: soundFX.Array.data[2]
-      value: 
-      objectReference: {fileID: 8300000, guid: 1b1fe5272f5a37449b334f1839ed19b4, type: 3}
-    - target: {fileID: 5832194300730821259, guid: eb83695f56a3b1846a2a1ba49c4e8882,
-        type: 3}
-      propertyPath: soundFX.Array.data[3]
-      value: 
-      objectReference: {fileID: 8300000, guid: a69e0fd880638594981814e4bfeea3b6, type: 3}
     - target: {fileID: 6995449397226718139, guid: eb83695f56a3b1846a2a1ba49c4e8882,
         type: 3}
       propertyPath: m_IsActive
@@ -1189,7 +1164,7 @@ Transform:
   m_GameObject: {fileID: 2090927424}
   m_LocalRotation: {x: 0.51180387, y: 0.49910486, z: -0.49357918, w: 0.49530882}
   m_LocalPosition: {x: -1.496, y: 0.966, z: 0.823}
-  m_LocalScale: {x: 0.35, y: 0.5, z: 0.02}
+  m_LocalScale: {x: 0.35, y: 0.5, z: 0.00028042}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 56037225}
