@@ -224,8 +224,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Scanner
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4013121738877056833, guid: a84debc7d7878014698384a3bf2ced91, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
