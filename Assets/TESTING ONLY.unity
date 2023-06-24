@@ -1130,6 +1130,11 @@ PrefabInstance:
       objectReference: {fileID: 125379690}
     - target: {fileID: 8840421768652778055, guid: eb83695f56a3b1846a2a1ba49c4e8882,
         type: 3}
+      propertyPath: hairOverlay
+      value: 
+      objectReference: {fileID: 2064099449}
+    - target: {fileID: 8840421768652778055, guid: eb83695f56a3b1846a2a1ba49c4e8882,
+        type: 3}
       propertyPath: monitorPoint
       value: 
       objectReference: {fileID: 1267178366}
@@ -1152,6 +1157,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4927785949728498834, guid: eb83695f56a3b1846a2a1ba49c4e8882,
     type: 3}
   m_PrefabInstance: {fileID: 1789107948}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2064099449 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7683171679677684184, guid: a84debc7d7878014698384a3bf2ced91,
+    type: 3}
+  m_PrefabInstance: {fileID: 125379689}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2090927424
 GameObject:
