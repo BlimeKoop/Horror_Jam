@@ -65,6 +65,7 @@
     <Compile Include="Assets\Scripts\HairOverlayController.cs" />
     <Compile Include="Assets\Scripts\ObjectSoundEffect.cs" />
     <Compile Include="Assets\Scripts\Player\PickupController.cs" />
+    <Compile Include="Assets\Scripts\Scanner\ChildController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
