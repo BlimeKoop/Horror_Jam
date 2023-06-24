@@ -43,8 +43,6 @@ public class PickupController : MonoBehaviour
                 if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.TransformDirection(Vector3.forward), out hit, pickupRange)){
                     rotatedObject = false;
                     PickupObject(hit.transform.gameObject);
-
-
                 }
             } 
             else 
@@ -90,10 +88,11 @@ public class PickupController : MonoBehaviour
 
         if (rotatingObj == true)
         {
-            holdPoint.transform.rotation = Quaternion.Lerp(
-				holdPoint.transform.rotation, transform.rotation, rotationSpeed * Time.fixedDeltaTime);
+			Quaternion targetRot = transform.rotation * Quaternion.AngleAxis(180f, Vector3.up);
+			
+            holdPoint.transform.rotation = Quaternion.Lerp(holdPoint.transform.rotation, targetRot, rotationSpeed * Time.fixedDeltaTime);
         
-            if (Quaternion.Angle(holdPoint.transform.rotation, transform.rotation) < 1) {
+            if (Quaternion.Angle(holdPoint.transform.rotation, targetRot) < 1) {
                 rotatingObj = false;
 			}
         }
@@ -125,6 +124,10 @@ public class PickupController : MonoBehaviour
 
     void PickupObject(GameObject pickObj)
     {
+		if (pickObj.GetComponentInParent<Rigidbody>() != null) {
+			pickObj = pickObj.GetComponentInParent<Rigidbody>().gameObject;
+		}
+		
         if (pickObj.GetComponent<Rigidbody>() && pickObj.layer == LayerMask.NameToLayer("Interactable"))
         {
             heldObjectRigidBody = pickObj.GetComponent<Rigidbody>();
