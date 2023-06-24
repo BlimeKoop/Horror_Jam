@@ -41,7 +41,9 @@ public class PaperLocking : MonoBehaviour
     int scanCounter = 0;
 
     AudioSource scareSounds;
-    public AudioClip[] spookySFX; 
+    public AudioClip[] spookySFX;
+
+    public JumpScare jumpScareScript;
 
 
     void OverlayHair(){
@@ -84,6 +86,7 @@ public class PaperLocking : MonoBehaviour
             default:
                 hairController.SetEnabled(false);
                 scareSounds.clip = spookySFX[scanCounter - 1];
+                jumpScareScript.ChildEnabled(true);
                 scareSounds.Play();
                 hairController.SetVisibility(0);
                 break;
@@ -91,14 +94,13 @@ public class PaperLocking : MonoBehaviour
         }
     }
 
-    void Start(){
-		hairController = hairOverlay.GetComponent<HairOverlayController>();
+    void Start() {
+        hairController = hairOverlay.GetComponent<HairOverlayController>();
         scannerAnimation = scannerObject.GetComponent<Animator>();
         scanningSoundFX = scannerObject.GetComponent<OpenCloseSFX>();
         scareSounds = gameObject.GetComponent<AudioSource>();
-
-    }
-
+        jumpScareScript = jumpScareScript.GetComponent<JumpScare>();
+        }
     void Update()
     {
         // IF THE SCANNER ANIMATION IS CLOSED AND THE SCANNER IS NOT OPERATING THEN IT WILL BEGIN THE SCANNING OF THE PAPER
