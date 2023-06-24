@@ -62,6 +62,7 @@
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Scripts\Scanner\PaperLocking.cs" />
     <Compile Include="Assets\ModularFirstPersonController\FirstPersonController\FirstPersonController.cs" />
+    <Compile Include="Assets\Scripts\HairOverlayController.cs" />
     <Compile Include="Assets\Scripts\ObjectSoundEffect.cs" />
     <Compile Include="Assets\Scripts\Player\PickupController.cs" />
   </ItemGroup>

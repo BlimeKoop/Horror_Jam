@@ -14,6 +14,8 @@ public class PickupController : MonoBehaviour
     private GameObject heldObject;
     private Rigidbody heldObjectRigidBody;
 
+    [SerializeField] GameObject interactableSystem;
+
     [Header("Physics")]
     [SerializeField] private float pickupRange = 4.0f;
     [SerializeField] private float pickupForce = 130f;
@@ -148,8 +150,9 @@ public class PickupController : MonoBehaviour
        heldObjectRigidBody.drag = 1;
        heldObjectRigidBody.constraints = RigidbodyConstraints.None;
 
-       //heldObjectRigidBody.transform.parent = null;
+       heldObjectRigidBody.transform.parent = interactableSystem.transform;
        heldObject = null;
+       heldObjectRigidBody = null;
 
     }
 
