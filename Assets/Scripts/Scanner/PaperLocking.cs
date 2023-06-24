@@ -55,11 +55,19 @@ public class PaperLocking : MonoBehaviour
     //  CHECKING IF THE OBJECT THAT HAS COLLIDED TAG IS SCANNABLE I.E. PAPER
         if (paper.CompareTag("Scannable"))
         {
+<<<<<<< HEAD
             gameObject.GetComponent<BoxCollider>().enabled = false;
             paperObject = paper.gameObject;
+=======
+			paperObject = paper.gameObject;
+			
+			if (paperObject.GetComponentInParent<Rigidbody>() != null)
+				paperObject = paperObject.GetComponentInParent<Rigidbody>().gameObject;
+            
+>>>>>>> main
             paperObject.gameObject.layer = LayerMask.NameToLayer("Default");
             paperObject.GetComponent<Rigidbody>().isKinematic = true;
-            paperObject.GetComponent<BoxCollider>().enabled = false;
+            paperObject.GetComponentInChildren<BoxCollider>().enabled = false;
             paperObject.transform.parent = lockingPoint.transform;
             paperObject.transform.localScale = new Vector3(paperObject.transform.localScale.x / 1.5f, paperObject.transform.localScale.y / 1.5f, paperObject.transform.localScale.z / 1.5f);
             paperObject.transform.position = lockingPoint.transform.position;
@@ -102,7 +110,7 @@ public class PaperLocking : MonoBehaviour
         paperObject.layer = LayerMask.NameToLayer("Interactable");
         paperObject.tag = "Untagged";
         paperObject.GetComponent<Rigidbody>().isKinematic = false;
-        paperObject.GetComponent<BoxCollider>().enabled = true;
+        paperObject.GetComponentInChildren<BoxCollider>().enabled = true;
         paperObject.transform.parent = _Interactables.transform;
         paperObject.transform.localScale = new Vector3(paperObject.transform.localScale.x * 1.5f, paperObject.transform.localScale.y * 1.5f, paperObject.transform.localScale.z * 1.5f);
         paperObject.transform.position = newSpawnPoint.transform.position;
