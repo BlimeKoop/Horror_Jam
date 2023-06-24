@@ -1,5 +1,14 @@
-parent it to empty object
+Hyung (CG-Moon)		-	Child Model
+gencraft		-	AI generated photos
 
-rotate that
+Sketchfab:
+			
+Freepoly.org		-	PC
+kreems			-	PC + mouse
+Agustin Honnun		-	Simple Book Shelf
+suusinho		-	Corkboard
+Ramesh0208		-	Door
 
-set that things up vector to Vector3.UP
+Pixabay:
+
+wood creak sfx
