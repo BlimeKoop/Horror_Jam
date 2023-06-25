@@ -105,7 +105,7 @@ public class PaperLocking : MonoBehaviour
     }
 	
 	private IEnumerator EndGame() {
-		yield return new WaitForSeconds(1.0f);
+		yield return new WaitForSeconds(1.5f);
 		
 		Application.Quit();
 	}
