@@ -26,7 +26,7 @@ public class PickupController : MonoBehaviour
     //has the object been rotated
     bool rotatedObject = false;
 
-    
+    bool scannerPrevention = false;
 
     //the time between rotation
     bool rotatingObj = false;
@@ -65,7 +65,7 @@ public class PickupController : MonoBehaviour
         }
 
         //  SIMILAR TO THE PICK UP MECHANIC HOWEVER INSTEAD IT PLAYS AN OBJECTS ANIMATION IF IT HAS ANIMATABLE LAYER CALLED BELOW
-        if (Input.GetMouseButtonDown(0) && heldObject == null)
+        if (Input.GetMouseButtonDown(0) && scannerPrevention == false)
         {
             RaycastHit animateHit;
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.TransformDirection(Vector3.forward), out animateHit, pickupRange))
@@ -84,7 +84,8 @@ public class PickupController : MonoBehaviour
 		if (heldObject != null)
 		{
 			MoveObject();
-		}
+            scannerPrevention = true;
+        }
 
         if (rotatingObj == true)
         {
@@ -124,7 +125,7 @@ public class PickupController : MonoBehaviour
 
     void PickupObject(GameObject pickObj)
     {
-		if (pickObj.GetComponentInParent<Rigidbody>() != null) {
+        if (pickObj.GetComponentInParent<Rigidbody>() != null) {
 			pickObj = pickObj.GetComponentInParent<Rigidbody>().gameObject;
 		}
 		
@@ -159,6 +160,15 @@ public class PickupController : MonoBehaviour
        heldObjectRigidBody.transform.parent = interactableSystem.transform;
        heldObject = null;
        heldObjectRigidBody = null;
+
+        StartCoroutine(ScannerAnimationStop());
+
+    }
+
+    IEnumerator ScannerAnimationStop(){
+
+        yield return new WaitForSeconds(0.5f);
+        scannerPrevention = false;
 
     }
 

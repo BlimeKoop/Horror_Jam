@@ -57,12 +57,14 @@ public class PaperLocking : MonoBehaviour
             case 1:
                 hairController.SetEnabled(true);
                 hairController.SetVisibility(0);
+                scareSounds.volume = 0.05f;
                 scareSounds.clip = spookySFX[scanCounter - 1 ];
                 scareSounds.Play();
                 break;
 
             case 2:
                 hairController.SetVisibility(0.03f);
+                scareSounds.volume = 0.11f;
                 scareSounds.clip = spookySFX[scanCounter - 1];
                 scareSounds.Play();
                 break;
@@ -70,30 +72,35 @@ public class PaperLocking : MonoBehaviour
             case 3:
                 hairController.SetVisibility(0.06f);
                 scareSounds.clip = spookySFX[scanCounter - 1];
+                scareSounds.volume = 0.22f;
                 scareSounds.Play();
                 break;
 
             case 4:
                 hairController.SetVisibility(0.1f);
                 scareSounds.clip = spookySFX[scanCounter - 1];
+                scareSounds.volume = 0.3f;
                 scareSounds.Play();
 				corkboardController.Release();
                 break;
             case 5:
                 hairController.SetVisibility(0.5f);
                 scareSounds.clip = spookySFX[scanCounter - 1];
+                scareSounds.volume = 0.45f;
                 scareSounds.Play();
                 break;
 
             case 6:
                 hairController.SetVisibility(1);
                 scareSounds.clip = spookySFX[scanCounter - 1];
+                scareSounds.volume = 0.55f;
                 scareSounds.Play();
                 break;
             default:
                 hairController.SetEnabled(false);
                 scareSounds.clip = spookySFX[scanCounter - 1];
                 jumpScareScript.ChildEnabled(true);
+                scareSounds.volume = 0.7f;
                 scareSounds.Play();
                 hairController.SetVisibility(0);
 				
@@ -140,7 +147,8 @@ public class PaperLocking : MonoBehaviour
             paperObject.GetComponent<Rigidbody>().isKinematic = true;
             paperObject.GetComponentInChildren<BoxCollider>().enabled = false;
             paperObject.transform.parent = lockingPoint.transform;
-            paperObject.transform.localScale = new Vector3(paperObject.transform.localScale.x / 1.5f, paperObject.transform.localScale.y / 1.5f, paperObject.transform.localScale.z / 1.5f);
+            //  PAPER IS SMALLER NOW THIS LINE IS NOT REQUIRED
+            //paperObject.transform.localScale = new Vector3(paperObject.transform.localScale.x / 1.5f, paperObject.transform.localScale.y / 1.5f, paperObject.transform.localScale.z / 1.5f);
             paperObject.transform.position = lockingPoint.transform.position;
             paperObject.transform.rotation = lockingPoint.transform.rotation;
         }
@@ -169,8 +177,6 @@ public class PaperLocking : MonoBehaviour
 		
         yield return new WaitForSeconds(waitTimer);
 		
-        scannerAnimation.SetBool("Opened", true);
-		
         if (cloneObj != null)
             DestroyImmediate(cloneObj);
 		
@@ -189,6 +195,13 @@ public class PaperLocking : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 		
 		OverlayHair();
+
+        yield return new WaitForSeconds(4.5f);
+
+        scannerAnimation.SetBool("Opened", true);
+
+        yield return new WaitForSeconds(0.5f);
+
         paperObject.layer = LayerMask.NameToLayer("Interactable");
         paperObject.tag = "Untagged";
 		
@@ -198,7 +211,8 @@ public class PaperLocking : MonoBehaviour
         paperObject.GetComponent<Rigidbody>().isKinematic = false;
         paperObject.GetComponentInChildren<BoxCollider>().enabled = true;
         paperObject.transform.parent = _Interactables.transform;
-        paperObject.transform.localScale = new Vector3(paperObject.transform.localScale.x * 1.5f, paperObject.transform.localScale.y * 1.5f, paperObject.transform.localScale.z * 1.5f);
+        //  PAPER IS SMALLER NOW THIS LINE IS NOT REQUIRED
+        //paperObject.transform.localScale = new Vector3(paperObject.transform.localScale.x * 1.5f, paperObject.transform.localScale.y * 1.5f, paperObject.transform.localScale.z * 1.5f);
         paperObject.transform.position = newSpawnPoint.transform.position;
         paperObject.transform.rotation = newSpawnPoint.transform.rotation;
         scanningSoundFX.isScanning = false;
